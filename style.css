@@ -1,0 +1,113 @@
+
+body {
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+main {
+    text-align: center;
+    font-size: 1em;
+}
+
+#game {
+    display: flex;
+    flex-wrap: wrap;
+    height: 98vh;
+}
+
+#game div:nth-child(1) {
+    justify-content: left;
+    flex: 1 1 70%;
+}
+
+#game div:nth-child(2) {
+    justify-content: right;
+    flex: 1 1 30%;
+}
+
+#title {
+    position: absolute;
+    top: -30px;
+    height: 7vh;
+    justify-content: left;
+    background-color: white;
+}
+
+#title img {
+    position: relative;
+    top: 10px;
+    height: 50px;
+}
+
+#click-area {
+    background-color: white;
+    height: 100%;
+    width: 75%;
+}
+
+#click-area #button {
+    position: relative;
+    display: block;
+    top: calc(60% - 200px);
+    left: calc(50% - 200px);
+}
+
+#button {
+    height: 240px;
+    width: 400px;
+    background: url(/assets/unpressed.png) no-repeat;
+    background-size: contain;
+    background-position: 50%;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+#click-area #button.pressed {
+    background: url(/assets/pressed.png) no-repeat;
+    background-size: contain;
+    background-position: 50%;
+}
+
+#click-area #balance {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 62%;
+    height: 80px;
+    font-size: 4em;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+#upgrades {
+    background-color: lightgray;
+}
+
+#click-effect {
+    display: none;
+    pointer-events: none;
+}
+
+#click-effect.click {
+    display: block;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 100px;
+    background: url(/assets/clickEffect.png) no-repeat;
+    background-size: contain;
+    animation: click 1s ease-in-out infinite;
+}
+
+/* @keyframes click {
+    0% {height: 0;}
+    0% {width: 0;}
+    50% {height: 40px;}
+    50% {width: 40px;}
+    100% {height: 0;}
+    100% {width: 0;}
+} */
