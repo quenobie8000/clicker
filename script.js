@@ -4,14 +4,15 @@ const balance = document.getElementById("balance");
 const reset = document.getElementById("reset");
 
 let balanceStorage = localStorage.getItem("balance");
+let buttonValueStorage = localStorage.getItem("buttonValue");
 
-var balanceValue = Number(balanceStorage);
-var multiplier = 0;
-var code;
+let balanceValue = Number(balanceStorage);
+let buttonValue = Number(buttonValueStorage);
+let multiplier = 0;
+
 balance.innerHTML = balanceValue;
 
 function onClick(element, code) {
-  this.code = code;
   element.addEventListener("mousedown", () => {
     code();
   });
@@ -45,4 +46,6 @@ onClick(document, () => {
 });
 onClick(reset,()=>resetBal());
 
-setInterval(()=> saveGame(),100);
+setInterval(()=> {
+  saveGame();
+},100);

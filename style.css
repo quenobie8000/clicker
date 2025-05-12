@@ -1,9 +1,19 @@
 
+:root {
+    --innerHeight:0;
+    --innerWidth:0;
+}
+
+@font-face {
+    font-family: "GameFont";
+    src: url(font/courier-pixel-monospaced.otf);
+}
+
 body {
     flex-direction: column;
-    overflow: hidden;
+    /* overflow: hidden; */
     user-select: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "GameFont";
 }
 
 main {
@@ -71,12 +81,10 @@ main {
 }
 
 #click-area #balance {
-    display: flex;
+    display: static;
     position: relative;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: 62%;
+    top: 50%;
+    text-align: center;
     height: 80px;
     font-size: 4em;
     font-weight: bold;
