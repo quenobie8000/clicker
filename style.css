@@ -7,6 +7,7 @@ body {
     flex-direction: column;
     user-select: none;
     font-family: "GameFont";
+    overflow: hidden;
 }
 
 main {
@@ -26,7 +27,7 @@ main {
 
 #game div:nth-child(2) {
     justify-content: right;
-    flex:1 1 400px;
+    flex: 1 1 400px;
 }
 
 #title {
@@ -66,6 +67,10 @@ main {
     image-rendering: pixelated;
 }
 
+#button:hover {
+    cursor: pointer;
+}
+
 #click-area #button.pressed {
     background: url(/assets/pressed.png) no-repeat;
     background-size: contain;
@@ -99,17 +104,58 @@ main {
     position: relative;
     display: block;
     background: lightgray;
+    border: 2px gray solid;
+    border-radius: 15px 0 0 15px;
     height: 100%;
     width: auto;
 }
 
 #compactButton {
     position: relative;
-    height:30px;
-    width: 30px;
+    background-color: lightgray;
+    height: 40px;
+    width: 20px;
     border: 2px gray solid;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    top: 15px;
+    left: -22px;
+}
+
+#compactButton:hover {
+    cursor: pointer;
+}
+
+.arrow {
+    position: relative;
     top: 5px;
     left: 5px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    pointer-events: none;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    left: 5px;
+}
+
+#upg1 {
+    position: relative;
+    display: block;
+    height: 70px;
+    width: 90%;
+    background-color: white;
+    top: 110%;
+    left: calc(50% - 90%/2);
 }
 
 #click-effect {
@@ -129,10 +175,29 @@ main {
 }
 
 @keyframes slide-right {
-    100% {flex: 0 0 0px;}
+    100% {
+        flex: 0 0 0px;
+    }
+
+    100% {
+        transform: translateX(32px)
+    }
 }
 
 @keyframes slide-left {
-    0% {flex: 0 0 0px}
-    100% {flex:1 1 400px}
+    0% {
+        flex: 0 0 0px
+    }
+
+    0% {
+        transform: translateX(32px)
+    }
+
+    100% {
+        flex: 1 1 400px
+    }
+
+    100% {
+        transform: translateX(0)
+    }
 }

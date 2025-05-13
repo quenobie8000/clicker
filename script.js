@@ -4,6 +4,8 @@ const balance = document.getElementById("balance");
 const reset = document.getElementById("reset");
 const upgradeArea = document.getElementById("upgradeArea");
 const upgrades = document.getElementById("upgrades");
+const compactButton = document.getElementById("compactButton");
+const arrow = document.getElementById("arrow");
 
 let balanceStorage = localStorage.getItem("balance");
 let buttonValueStorage = localStorage.getItem("buttonValue");
@@ -38,36 +40,41 @@ function resetBal() {
   updateBalance();
 }
 
-function createElement(){
-
-}
-
-function compactButton(){
-  if (window.innerWidth < 815) {
-    upgradeArea.classList.remove("default");
-    upgradeArea.classList.add("compact");
-    upgrades.classList.remove("default");
-    upgrades.classList.add("compact");
+function compactState() {
+  if ((window.innerWidth < 815) && (compactButton.className.split(" ")[1] !== "toggled")) {
+    upgrades.classList.replace("default", "compact");
+    compactButton.classList.replace("default", "compact");
   }
-  else {
-    upgradeArea.classList.remove("compact");
-    upgradeArea.classList.add("default");
-    upgrades.classList.add("default");
-    upgrades.classList.remove("compact");
+
+  if (compactButton.className.split(" ")[0] === "default") {
+    onClick(compactButton, () => {
+      upgrades.classList.replace("default", "compact");
+      compactButton.classList.replace("default", "compact");
+      compactButton.classList.remove("toggled");
+      arrow.classList.replace("right", "left");
+    });
+  } else if (compactButton.className.split(" ")[0] === "compact") {
+    onClick(compactButton, () => {
+      upgrades.classList.replace("compact", "default");
+      compactButton.classList.replace("compact", "default");
+      compactButton.classList.add("toggled");
+      arrow.classList.replace("left", "right");
+    });
   }
 }
 
 onClick(button, () => IDaddTempClass(button, "pressed", 200));
-onClick(button, () => balanceValue += 1);
+onClick(button, () => (balanceValue += 1));
 onClick(button, () => updateBalance());
 onClick(document, () => {
   IDaddTempClass(clickEffect, "click", 200);
   clickEffect.style.top = event.pageY - 12 + "px";
   clickEffect.style.left = event.pageX - 17 + "px";
 });
-onClick(reset,()=>resetBal());
+onClick(reset, () => resetBal());
 
-setInterval(()=> {
+setInterval(() => {
   saveGame();
-  compactButton();
-},100);
+  compactState();
+  console.log(compactButton.className.split(" ")[1])
+}, 100);
