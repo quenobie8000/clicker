@@ -36,28 +36,32 @@ function saveGame() {
 }
 
 function resetBal() {
+  if (confirm("Are you sure you want to reset your game progress PERMANETLY?") === "true"){
   balanceValue = 0;
   updateBalance();
+  }
 }
 
 function compactState() {
-  if ((window.innerWidth < 815) && (compactButton.className.split(" ")[1] !== "toggled")) {
+  if (
+    window.innerWidth < 815 &&
+    upgrades.className.split(" ")[1] !== "toggled") {
     upgrades.classList.replace("default", "compact");
     compactButton.classList.replace("default", "compact");
+      arrow.classList.replace("right", "left");
   }
-
   if (compactButton.className.split(" ")[0] === "default") {
     onClick(compactButton, () => {
       upgrades.classList.replace("default", "compact");
       compactButton.classList.replace("default", "compact");
-      compactButton.classList.remove("toggled");
+      upgrades.classList.remove("toggled");
       arrow.classList.replace("right", "left");
     });
   } else if (compactButton.className.split(" ")[0] === "compact") {
     onClick(compactButton, () => {
       upgrades.classList.replace("compact", "default");
       compactButton.classList.replace("compact", "default");
-      compactButton.classList.add("toggled");
+      if (window.innerWidth < 815) upgrades.classList.add("toggled");
       arrow.classList.replace("left", "right");
     });
   }
@@ -76,5 +80,4 @@ onClick(reset, () => resetBal());
 setInterval(() => {
   saveGame();
   compactState();
-  console.log(compactButton.className.split(" ")[1])
 }, 100);

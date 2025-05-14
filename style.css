@@ -35,6 +35,7 @@ main {
     top: -30px;
     height: 7vh;
     justify-content: left;
+    z-index: 9;
     background-color: white;
 }
 
@@ -89,7 +90,9 @@ main {
 }
 
 #upgrades {
-    background-color: white;
+    background-color: transparent;
+    min-width: 1.60%;
+    max-width: 100%;
 }
 
 #upgrades.default {
@@ -107,7 +110,7 @@ main {
     border: 2px gray solid;
     border-radius: 15px 0 0 15px;
     height: 100%;
-    width: auto;
+    width: 100%;
 }
 
 #compactButton {
@@ -148,15 +151,45 @@ main {
     left: 5px;
 }
 
-#upg1 {
+#upgList {
+    padding: 5px;
+}
+
+#upgList div {
+    margin-bottom: 15px;
     position: relative;
     display: block;
     height: 70px;
     width: 90%;
     background-color: white;
-    top: 110%;
     left: calc(50% - 90%/2);
 }
+
+#upgList{
+    position: relative;
+    top: 23px;
+}
+
+#upgList div.imgAlignUpg {
+    position: relative;
+    vertical-align:top;
+    height: 60px;
+    width: auto;
+    top: calc(50% - 30px);
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+#upg2 {}
+
+#upg3 {}
+
+#upg4 {}
+
+#upg5 {}
+
+#upg6 {}
+
 
 #click-effect {
     display: none;
@@ -175,29 +208,75 @@ main {
 }
 
 @keyframes slide-right {
-    100% {
-        flex: 0 0 0px;
+    0% {
+        transform: translateX(50px)
     }
 
     100% {
-        transform: translateX(32px)
+        flex: 0 0 0
+    }
+
+    100% {
+        transform: translateX(34px)
     }
 }
 
 @keyframes slide-left {
     0% {
-        flex: 0 0 0px
+        flex: 0 0 0
     }
 
     0% {
-        transform: translateX(32px)
+        transform: translateX(34px)
     }
 
     100% {
-        flex: 1 1 400px
+        flex: 0 0 400px
     }
 
     100% {
         transform: translateX(0)
+    }
+}
+
+@media (max-width: 815px) {
+    #game {
+        position: relative;
+    }
+
+    #upgrades.toggled {
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        z-index: 10;
+        animation: translateLeft 1s ease-in-out both;
+    }
+
+    #upgrades.compact {
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        z-index: 10;
+        animation: translateRight 1s ease-in-out both;
+    }
+
+    @keyframes translateLeft {
+        0% {
+            left: 100%
+        }
+
+        100% {
+            left: 5%
+        }
+    }
+
+    @keyframes translateRight {
+        0% {
+            left: 5%
+        }
+
+        100% {
+            left: 101.15%
+        }
     }
 }
