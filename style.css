@@ -1,4 +1,4 @@
-@font-face {
+ @font-face {
     font-family: "GameFont";
     src: url(font/courier-pixel-monospaced.otf);
 }
@@ -170,14 +170,29 @@ main {
     top: 23px;
 }
 
-#upgList div.imgAlignUpg {
+#upgList img {
     position: relative;
-    vertical-align:top;
+    vertical-align:middle;
+    align-items: left;
     height: 60px;
     width: auto;
     top: calc(50% - 30px);
     image-rendering: crisp-edges;
     image-rendering: pixelated;
+}
+#upg1 {
+    display: flex;
+}
+
+#upg1.upgTitle {
+    position: relative;
+    top: calc(50% -5px);
+}
+
+#upg1.price1 {
+    position: relative;
+    align-items: right;
+    top: calc(50% -5px);
 }
 
 #upg2 {}
