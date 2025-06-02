@@ -1,20 +1,22 @@
-const button = document.getElementById("button");
-const clickEffect = document.getElementById("click-effect");
-const balance = document.getElementById("balance");
-const reset = document.getElementById("reset");
-const upgradeArea = document.getElementById("upgradeArea");
-const upgrades = document.getElementById("upgrades");
-const compactButton = document.getElementById("compactButton");
-const arrow = document.getElementById("arrow");
+const button = document.querySelector("#button");
+const clickEffect = document.querySelector("#click-effect");
+const balance = document.querySelector("#balance");
+const reset = document.querySelector("#reset");
+const upgrades = document.querySelector("#upgrades");
+const compactButton = document.querySelector("#compactButton");
+const arrow = document.querySelector("#arrow");
+const autoClick = document.querySelector("#AutoClick");
+const autoClickP = document.querySelector("#AutoClick .upgPrice");
+const autoClickA = document.querySelector("#AutoClick .upgOwned");
+const autoClickRefuse = document.querySelector("#AutoClick .upgRefuse");
 
 let balanceStorage = localStorage.getItem("balance");
-let buttonValueStorage = localStorage.getItem("buttonValue");
+let AutClkOwnStorage = localStorage.getItem("AutClkOwn");
 
+let baseAutClkPri = 15;
 let balanceValue = Number(balanceStorage);
-let buttonValue = Number(buttonValueStorage);
-let multiplier = 0;
-
-balance.innerHTML = balanceValue;
+let multiplier = 1;
+let AutClkOwn = Number(AutClkOwnStorage);
 
 function onClick(element, code) {
   element.addEventListener("mousedown", () => {
@@ -22,33 +24,79 @@ function onClick(element, code) {
   });
 }
 
-function IDaddTempClass(element, className, timeOutms) {
+function addTempClass(element, className, timeOutms) {
   element.classList.add(className);
   setTimeout(() => element.classList.remove(className), timeOutms);
 }
 
-function updateBalance() {
-  balance.innerHTML = balanceValue;
+function Formatter(num) {
+  if (Math.abs(num) > 999 && Math.abs(num) < 999999) {
+    return Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k";
+  } else if (Math.abs(num) > 999999 && Math.abs(num) < 999999999) {
+    return Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + "M";
+  } else if (Math.abs(num) > 999999999 && Math.abs(num) < 999999999999) {
+    return Math.sign(num) * (Math.abs(num) / 1000000000).toFixed(1) + "B";
+  } else if (Math.abs(num) > 999999999999 && Math.abs(num) < 999999999999999) {
+    return Math.sign(num) * (Math.abs(num) / 1000000000000).toFixed(1) + "T";
+  } else {
+    return Math.sign(num) * Math.abs(num);
+  }
+}
+
+function resetGame() {
+  balanceValue = 0;
+  AutClkOwn = 0;
+  calcPrice();
+  update();
+}
+
+function update() {
+  balance.innerHTML = Formatter(balanceValue);
+  autoClickA.innerHTML = Formatter(AutClkOwn);
+  autoClickP.innerHTML = Formatter(AutClkPri) + "$";
+  AutClkPri = Math.round(AutClkPri);
 }
 
 function saveGame() {
   localStorage.setItem("balance", balanceValue);
+  localStorage.setItem("AutClkOwn", AutClkOwn);
 }
 
-function resetBal() {
-  if (confirm("Are you sure you want to reset your game progress PERMANETLY?") === "true"){
-  balanceValue = 0;
-  updateBalance();
+function Click() {
+  addTempClass(button, "pressed", 200);
+  balanceValue += 1 * multiplier;
+  calcPrice();
+  update();
+}
+
+function upgAutClk() {
+  if (balanceValue >= AutClkPri) {
+    balanceValue -= AutClkPri;
+    AutClkOwn++;
+    calcPrice();
+  } else if (balanceValue < AutClkPri || balanceValue < 0) {
+    addTempClass(autoClickRefuse, "refused", 500);
   }
+}
+
+function calcPrice() {
+  AutClkPri = Math.round(baseAutClkPri * 1.1 ** AutClkOwn);
+  update();
+}
+
+function idleIncome() {
+  balanceValue += AutClkOwn * 1;
+  update();
 }
 
 function compactState() {
   if (
     window.innerWidth < 815 &&
-    upgrades.className.split(" ")[1] !== "toggled") {
+    upgrades.className.split(" ")[1] !== "toggled"
+  ) {
     upgrades.classList.replace("default", "compact");
     compactButton.classList.replace("default", "compact");
-      arrow.classList.replace("right", "left");
+    arrow.classList.replace("right", "left");
   }
   if (compactButton.className.split(" ")[0] === "default") {
     onClick(compactButton, () => {
@@ -67,17 +115,19 @@ function compactState() {
   }
 }
 
-onClick(button, () => IDaddTempClass(button, "pressed", 200));
-onClick(button, () => (balanceValue += 1));
-onClick(button, () => updateBalance());
+onClick(game, () => update());
+
 onClick(document, () => {
-  IDaddTempClass(clickEffect, "click", 200);
+  addTempClass(clickEffect, "click", 200);
   clickEffect.style.top = event.pageY - 12 + "px";
   clickEffect.style.left = event.pageX - 17 + "px";
 });
-onClick(reset, () => resetBal());
-
 setInterval(() => {
   saveGame();
   compactState();
-}, 100);
+}, 500);
+
+setInterval(() =>   idleIncome(),2000);
+
+calcPrice();
+update();

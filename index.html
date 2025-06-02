@@ -16,32 +16,35 @@
       <h1>
         <img src="/favicon/favicon.ico"> Clicker</img>
       </h1>
-      <button id="reset">Reset</button>
+      <button id="reset" onclick="resetGame()">Reset</button>
     </main>
   </div>
   <div id="game">
     <div id="click-area">
-      <div id="button"></div>
+      <div id="button" onclick="Click()"></div>
       <div id="balance">Click!</div>
     </div>
     <div id="upgrades" class="default">
-    <div id="upgradeArea" class="default">
-    <div id="compactButton" class="default">
-      <div id="arrow" class="arrow right"></div>
-    </div>
-    <ul id="upgList">
-      <div id="upg1">
-        <img src="/assets/finger.png"/>
-        <span class="upgTitle">Auto click</span>
-        <span id="price1">0</span>
+      <div id="upgradeArea" class="default">
+      <div id="compactButton" class="default">
+        <div id="arrow" class="arrow right"></div>
       </div>
-      <div id="upg2" class="upgTitle">test2</div>
-      <div id="upg3" class="upgTitle">test3</div>
-      <div id="upg4" class="upgTitle">test4</div>
-      <div id="upg5" class="upgTitle">test5</div>
-      <div id="upg6" class="upgTitle">test6</div>
-    </ul>
-    </div>
+      <div id="upgAreaTitle">Upgrades</div>
+        <div id="upgList">
+          <div id="AutoClick" class="upg" onclick="upgAutClk()">
+            <div class="upgPrice"><span>0$</span></div>
+            <div class="upgRefuse"><span>Not enough clicks!</span></div>
+            <img class="upgImg" src="/assets/finger.png" />
+            <div class="upgTitle">Auto click</div>
+            <div class="upgOwned">0</div>
+          </div>
+          <div class="upg">2</div>
+          <div class="upg">3</div>
+          <div class="upg">4</div>
+          <div class="upg">5</div>
+          <div class="upg">6</div>
+        </div>
+      </div>
     </div>
   </div>
   <span id="click-effect"></span>
