@@ -186,7 +186,12 @@ main {
     text-align: center;
     font-family: Pixelify Sans;
     font-size: 4em;
-    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+#upgTip {
+    text-align: center;
+    font-size: 1em;
     margin-bottom: 15px;
 }
 

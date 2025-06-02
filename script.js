@@ -126,8 +126,9 @@ setInterval(() => {
   saveGame();
   compactState();
 }, 500);
-
-setInterval(() =>   idleIncome(),2000);
+setInterval(() => {
+    idleIncome();
+}, 2000/AutClkOwn);
 
 calcPrice();
 update();
