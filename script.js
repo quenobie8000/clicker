@@ -9,6 +9,9 @@ const autoClick = document.querySelector("#AutoClick");
 const autoClickP = document.querySelector("#AutoClick .upgPrice");
 const autoClickA = document.querySelector("#AutoClick .upgOwned");
 const autoClickRefuse = document.querySelector("#AutoClick .upgRefuse");
+const CPSel = document.querySelector("#CPS");
+
+let incomeInterval;
 
 let balanceStorage = localStorage.getItem("balance");
 let AutClkOwnStorage = localStorage.getItem("AutClkOwn");
@@ -55,6 +58,7 @@ function update() {
   autoClickA.innerHTML = Formatter(AutClkOwn);
   autoClickP.innerHTML = Formatter(AutClkPri) + "$";
   AutClkPri = Math.round(AutClkPri);
+  CPSel.innerHTML = AutClkOwn / 10 + "/s"
 }
 
 function saveGame() {
@@ -73,6 +77,7 @@ function upgAutClk() {
   if (balanceValue >= AutClkPri) {
     balanceValue -= AutClkPri;
     AutClkOwn++;
+    startAutoIncome();
     calcPrice();
   } else if (balanceValue < AutClkPri || balanceValue < 0) {
     addTempClass(autoClickRefuse, "refused", 500);
@@ -85,8 +90,17 @@ function calcPrice() {
 }
 
 function idleIncome() {
-  balanceValue += AutClkOwn * 1;
-  update();
+    balanceValue += 1;
+    update();
+}
+
+function startAutoIncome() {
+    if (incomeInterval) clearInterval(incomeInterval);
+    if (AutClkOwn > 0) {
+        incomeInterval = setInterval(() => {
+            idleIncome();
+        }, 10000 / AutClkOwn);
+    }
 }
 
 function compactState() {
@@ -126,9 +140,7 @@ setInterval(() => {
   saveGame();
   compactState();
 }, 500);
-setInterval(() => {
-    idleIncome();
-}, 2000/AutClkOwn);
 
+startAutoIncome();
 calcPrice();
 update();

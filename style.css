@@ -77,14 +77,11 @@ main {
     width: 75%;
 }
 
-#click-area #button {
+#button {
     position: relative;
     display: block;
     top: calc(60% - 200px);
     left: calc(50% - 200px);
-}
-
-#button {
     height: 240px;
     width: 400px;
     background: url(/assets/unpressed.png) no-repeat;
@@ -98,13 +95,24 @@ main {
     cursor: pointer;
 }
 
-#click-area #button.pressed {
+#button.pressed {
     background: url(/assets/pressed.png) no-repeat;
     background-size: contain;
     background-position: 50%;
 }
 
-#click-area #balance {
+#CPS {
+    display: static;
+    position: relative;
+    top: 40%;
+    text-align: center;
+    height: 80px;
+    font-size: 2em;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+#balance {
     display: static;
     position: relative;
     top: 50%;
