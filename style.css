@@ -113,9 +113,9 @@ main {
 }
 
 #balance {
-    display: static;
+    display: sticky;
     position: relative;
-    top: 50%;
+    top: 35%;
     text-align: center;
     height: 80px;
     font-size: 4em;
