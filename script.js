@@ -143,10 +143,10 @@ setInterval(() => {
 }, 500);
 
 setInterval(() => {
-  balance.style.top = window.innerHeight * 0.3 + "px";
-  CPSel.style.top = window.innerHeight * 0.3 + "px";
-  button.style.height = window.innerHeight * 0.4545 + "px";
-  button.style.top = 0.5 * window.innerHeight * 0.4545 + "px";
+  balance.style.top = window.innerHeight - 420 + "px";
+  CPSel.style.top = window.innerHeight - 400 + "px";
+  button.style.setProperty("--But-width", window.innerHeight * 0.4545 + "px");
+  // button.style.top = 0.5 * window.innerHeight * 0.5 + "px";
 }, 200);
 
 startAutoIncome();
@@ -156,11 +156,11 @@ update();
 
 
 
-(function () {
-	var script =  document.createElement('script');
-	script.src="//cdn.jsdelivr.net/npm/eruda";
-	document.body.appendChild(script);
-	script.onload = function () {
-		eruda.init()
-	} 
-})();
+// (function () {
+// 	var script =  document.createElement('script');
+// 	script.src="//cdn.jsdelivr.net/npm/eruda";
+// 	document.body.appendChild(script);
+// 	script.onload = function () {
+// 		eruda.init()
+// 	} 
+// })();

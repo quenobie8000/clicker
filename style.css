@@ -28,6 +28,12 @@
     src: url(font/courier-pixel-monospaced.otf);
 }
 
+:root {
+    /*values are assigned in javascript*/
+    --But-width: ;
+
+}
+
 body {
     flex-direction: column;
     user-select: none;
@@ -80,10 +86,10 @@ main {
 #button {
     position: relative;
     display: block;
-    top: calc(60% - 200px);
-    left: calc(50% - 200px);
+    left: calc(50% - (var(--But-width)/2));
+    top: calc(50% - 120px);
     height: 240px;
-    width: 400px;
+    max-width: var(--But-width);
     background: url(/assets/unpressed.png) no-repeat;
     background-size: contain;
     background-position: 50%;
@@ -321,34 +327,36 @@ main {
 
 @keyframes slide-right {
     0% {
-        transform: translateX(50px)
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(105%);
     }
 
     100% {
-        flex: 0 0 0
-    }
-
-    100% {
-        transform: translateX(34px)
+        transform: translateX(126%);
+        flex: 0 0 0;
     }
 }
 
 @keyframes slide-left {
-    0% {
-        flex: 0 0 0
+    0% {  
+        transform: translateX(126%);
+        flex: 0 0 0;
     }
-
-    0% {
-        transform: translateX(34px)
+    
+    25% {
+        flex: 0 0 1;
     }
-
+    26% {
+        transform: translateX(102%);
+    }
+    
     100% {
-        flex: 0 0 400px
+        transform: translateX(0);
     }
 
-    100% {
-        transform: translateX(0)
-    }
 }
 
 @keyframes opacityUp {
