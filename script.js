@@ -50,6 +50,7 @@ function resetGame() {
   balanceValue = 0;
   AutClkOwn = 0;
   calcPrice();
+  calcMulti()
   startAutoIncome();
   update();
 }
@@ -104,6 +105,16 @@ function startAutoIncome() {
     }
 }
 
+function totOwn() {
+  total = AutClkOwn;
+  return total;
+}
+
+function calcMulti() {
+  multi = Math.floor(totOwn()/50);
+  multiplier = 1 + multi;
+}
+
 function compactState() {
   if (
     window.innerWidth < 815 &&
@@ -139,6 +150,7 @@ onClick(document, () => {
 });
 setInterval(() => {
   saveGame();
+  calcMulti()
   compactState();
 }, 500);
 
@@ -146,10 +158,10 @@ setInterval(() => {
   balance.style.top = window.innerHeight - 420 + "px";
   CPSel.style.top = window.innerHeight - 400 + "px";
   button.style.setProperty("--But-width", window.innerHeight * 0.4545 + "px");
-  // button.style.top = 0.5 * window.innerHeight * 0.5 + "px";
 }, 200);
 
 startAutoIncome();
+calcMulti()
 calcPrice();
 update();
 
