@@ -10,6 +10,7 @@ const autoClickP = document.querySelector("#AutoClick .upgPrice");
 const autoClickA = document.querySelector("#AutoClick .upgOwned");
 const autoClickRefuse = document.querySelector("#AutoClick .upgRefuse");
 const CPSel = document.querySelector("#CPS");
+const clickVal = document.querySelector("#ClickAmount")
 
 let incomeInterval;
 
@@ -33,17 +34,24 @@ function addTempClass(element, className, timeOutms) {
 }
 
 function Formatter(num) {
-  if (Math.abs(num) > 999 && Math.abs(num) < 999999) {
-    return Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k";
-  } else if (Math.abs(num) > 999999 && Math.abs(num) < 999999999) {
-    return Math.sign(num) * (Math.abs(num) / 1000000).toFixed(1) + "M";
-  } else if (Math.abs(num) > 999999999 && Math.abs(num) < 999999999999) {
-    return Math.sign(num) * (Math.abs(num) / 1000000000).toFixed(1) + "B";
-  } else if (Math.abs(num) > 999999999999 && Math.abs(num) < 999999999999999) {
-    return Math.sign(num) * (Math.abs(num) / 1000000000000).toFixed(1) + "T";
-  } else {
-    return Math.sign(num) * Math.abs(num);
-  }
+  letter = [
+    "", "k", "M", "B", "T", "q", "Q", "s", "S", "O", "N",
+    "D", "U", "Dd", "Td", "qd", "Qd", "sd", "Sd", "Od", "Nd", 
+    "V", "Uv", "Dv", "Tv", "qv", "Qv", "sv", "Sv", "Ov", "Nv", 
+    "Tt", "Ut", "Dt","Ttt", "qt", "Qt", "st", "St", "Ot", "Nt"
+  ]
+
+  if (num === 0) return 0;
+
+  exp = Math.floor(Math.log10(Math.abs(num))/3);
+
+  if (exp >= letter.lenght) return num.toExponential(2);
+
+  zeros = Math.pow(10, exp * 3);
+  formatNum = (num / zeros).toFixed(1);
+  suffix = letter[exp];
+
+  return formatNum + suffix;
 }
 
 function resetGame() {
@@ -155,9 +163,10 @@ setInterval(() => {
 }, 500);
 
 setInterval(() => {
-  balance.style.top = window.innerHeight - 420 + "px";
-  CPSel.style.top = window.innerHeight - 400 + "px";
+  balance.style.top = window.innerHeight * 0.56 + "px";
+  CPSel.style.top = window.innerHeight * 0.5815899 + "px";
   button.style.setProperty("--But-width", window.innerHeight * 0.4545 + "px");
+  clickVal.style.left = 50% - (window.innerHeight) + "px";
 }, 200);
 
 startAutoIncome();

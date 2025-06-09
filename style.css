@@ -107,6 +107,15 @@ main {
     background-position: 50%;
 }
 
+#ClickAmount {
+    /* display: none; */
+    position: absolute;
+    pointer-events: none;
+    font-size: 2em;
+    z-index: 99;
+    left: 50%;
+}
+
 #CPS {
     display: static;
     position: relative;
